@@ -1,7 +1,13 @@
-import 'dotenv/config'
+import "dotenv/config";
+
+const validateEnv = (variable, name) => {
+  if (!variable) throw new Error(`Environment variable ${name} is not defined`);
+  return variable;
+};
 
 export const config = {
-  port: process.env.PORT || 5000,
-  monogodb: process.env.MONGODB_URI,
-  jwSecret: process.env.JWT_SECRET,
-}
+  port: validateEnv(process.env.PORT, "PORT"),
+  monogodb: validateEnv(process.env.MONGODB_URI, "MONGODB_URI"),
+  jwSecret: validateEnv(process.env.JWT_SECRET, "JWT_SECRET"),
+  salt: validateEnv(process.env.SALT_ROUNDS, "SALT_ROUNDS"),
+};
