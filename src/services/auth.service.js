@@ -14,3 +14,12 @@ export const register = async(user)=>{
     }
 }
 
+export const login = async(email, password)=>{
+    try{
+        const existUser = await userReposiry.findUserByEmail(email);
+        if(!existUser || !(await existUser.comparePassword(password)))
+            throw new Error(authErrorCodes.INVALID_CREDENTIALS);
+    }catch(e){
+        throw new ServiceError('Login error', e.code || authErrorCodes.INVALID_CREDENTIALS);
+    }
+}
