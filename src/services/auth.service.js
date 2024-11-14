@@ -38,3 +38,16 @@ export const login = async (email, password) => {
     );
   }
 };
+
+
+export const logout = async (userId)=>{
+  try{
+    await userReposiry.updateUser(userId, {token: null});
+    return "Logout success";
+  }catch(e){
+    throw new ServiceError(
+      "Logout error",
+      e.code || authErrorCodes.FAILD_TO_LOGOUT
+    );
+  }
+}
