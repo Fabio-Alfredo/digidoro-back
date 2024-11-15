@@ -26,3 +26,30 @@ export const getAllUsers = async () => {
         );
     }
 };
+
+
+export const updateUser =async(userId, data)=>{
+    try{
+        const user = await userReposiry.updateUser(userId, data);
+        if(!user) throw new Error(userErrorCodes.FAILD_TO_UPDATE_USER);
+        return user;
+    }catch(e){
+        throw new ServiceError(
+            "Update user error",
+            e.code || userErrorCodes.USER_NOT_FOUND
+        );
+    }
+}
+
+export const deleteUser = async (userId)=>{
+    try{
+        const user = await userReposiry.deleteUser(userId);
+        if(!user) throw new Error(userErrorCodes.FAILD_TO_DELETE_USER);
+        return user;
+    }catch(e){
+        throw new ServiceError(
+            "Delete user error",
+            e.code || userErrorCodes.USER_NOT_FOUND
+        );
+    }
+}

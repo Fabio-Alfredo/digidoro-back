@@ -1,5 +1,9 @@
 export const userErrorCodes = {
     USER_NOT_FOUND: 1000,
     USER_FECH_FAIL: 1001,
-    
+    USER_NOT_EXIST: 1002,
+    FAILD_TO_GET_ALL_USERS: 1003,
+    FAILD_TO_UPDATE_USER: 1004,
+    FAILD_TO_DELETE_USER: 1005,
 }
+
