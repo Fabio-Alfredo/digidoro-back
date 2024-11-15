@@ -1,7 +1,8 @@
 import User from "../models/user.model";
 
 export const createUser = async (user)=>{
-    return await User.create(user);
+    const newUser = new User(user);
+    return await newUser.save();
 }
 
 export const findUserById = async(id)=>{
