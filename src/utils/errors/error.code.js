@@ -6,8 +6,8 @@ export const errorCodes ={
         FAILD_TO_GET_ALL_USERS: 1003,
         FAILD_TO_UPDATE_USER: 1004,
         FAILD_TO_DELETE_USER: 1005,
-        FAILD_TO_ADD_TODO: 1030,
-        FAILD_TO_ADD_POMODORO: 1031,
+        FAILD_TO_ADD_TODO: 1006,
+        FAILD_TO_ADD_POMODORO: 1007,
     },
     AUTH:{
         USER_NOT_FOUND: 2000,
@@ -18,7 +18,6 @@ export const errorCodes ={
         FAILD_TO_LOGOUT: 2005,
         FAILD_TO_LOGIN: 2006,
     },
-
 
 }
 
