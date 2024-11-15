@@ -25,3 +25,11 @@ export const updateUser = async(id, user)=>{
 export const deleteUser = async(id)=>{
     return await User.findByIdAndDelete(id);
 }
+
+export const addTodo = async(id, todoId)=>{
+    return await User.findByIdAndUpdate(id, {$push: {id_todos: todoId}}, {new: true});
+}
+
+export const addPomodoro = async(id, pomodoroId)=>{
+    return await User.findByIdAndUpdate(id, {id_pomodoro: pomodoroId}, {new: true});
+}

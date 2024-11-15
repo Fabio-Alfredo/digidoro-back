@@ -53,3 +53,29 @@ export const deleteUser = async (userId)=>{
         );
     }
 }
+
+export const addTodoUser = async (userId, todoId)=>{
+    try{
+        const user = await userReposiry.addTodoUser(userId, todoId);
+        if(!user) throw new Error(userErrorCodes.FAILD_TO_ADD_TODO);
+        return user;
+    }catch(e){
+        throw new ServiceError(
+            "Add todo to user error",
+            e.code || userErrorCodes.USER_NOT_FOUND
+        );
+    }
+}
+
+export const addPomodoroUser = async (userId, pomodoroId)=>{
+    try{
+        const user = await userReposiry.addPomodoroUser(userId, pomodoroId);
+        if(!user) throw new Error(userErrorCodes.FAILD_TO_ADD_POMODORO);
+        return user;
+    }catch(e){
+        throw new ServiceError(
+            "Add pomodoro to user error",
+            e.code || userErrorCodes.USER_NOT_FOUND
+        );
+    }
+}
