@@ -56,7 +56,7 @@ export const deleteUser = async (userId)=>{
 
 export const addTodoUser = async (userId, todoId)=>{
     try{
-        const user = await userReposiry.addTodoUser(userId, todoId);
+        const user = await userReposiry.addTodo(userId, todoId);
         if(!user) throw new Error(userErrorCodes.FAILD_TO_ADD_TODO);
         return user;
     }catch(e){
@@ -69,7 +69,7 @@ export const addTodoUser = async (userId, todoId)=>{
 
 export const addPomodoroUser = async (userId, pomodoroId)=>{
     try{
-        const user = await userReposiry.addPomodoroUser(userId, pomodoroId);
+        const user = await userReposiry.addPomodoro(userId, pomodoroId);
         if(!user) throw new Error(userErrorCodes.FAILD_TO_ADD_POMODORO);
         return user;
     }catch(e){
