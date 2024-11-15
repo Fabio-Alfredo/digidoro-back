@@ -28,7 +28,7 @@ export const login = async (email, password) => {
     const token = createToken({ id: existUser._id });
     if (!token) throw new Error(authErrorCodes.FAILD_CREATE_TOKEN);
 
-    await userReposiry.updateUser(existUser._id, { token });
+    await userReposiry.addToken(existUser._id, token);
 
     return token;
   } catch (e) {
