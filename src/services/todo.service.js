@@ -16,7 +16,7 @@ export const createTodo = async (todo) => {
 
 export const getTodoById = async (todoId) => {
   try {
-    const todo = await todoRepository.findTodoById(todoId);
+    const todo = await todoRepository.getTodoById(todoId);
     if (!todo) throw new Error(errorCodes.TODO.TODO_NOT_FOUND);
     return todo;
   } catch (e) {
@@ -29,12 +29,24 @@ export const getTodoById = async (todoId) => {
 
 export const getAllTodos = async () => {
   try {
-    const todos = await todoRepository.findAllTodos();
+    const todos = await todoRepository.getTodos();
     return todos;
   } catch (e) {
     throw new ServiceError(
       "Get all todos error",
       e.code || errorCodes.TODO.FAILD_TO_GET_ALL_TODOS
+    );
+  }
+};
+
+export const getTodosByUserId = async (userId) => {
+  try {
+    const todos = await todoRepository.getTodoByUserId(userId);
+    return todos;
+  } catch (e) {
+    throw new ServiceError(
+      "Get todos by user id error",
+      e.code || errorCodes.TODO.FAILD_TO_GET_TODOS_BY_USER_ID
     );
   }
 };

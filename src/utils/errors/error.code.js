@@ -28,5 +28,6 @@ export const errorCodes = {
     FAILD_TO_ADD_TODO: 3005,
     FAILD_TO_ADD_POMODORO: 3006,
     FAILD_TO_PATCH_STATE_TODO: 3007,
+    FAILD_TO_GET_TODOS_BY_USER_ID: 3008,
   },
 };
