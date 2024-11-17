@@ -1,6 +1,6 @@
 import { ServiceError } from "../utils/error";
 import { errorCodes } from "../utils/errors/error.code";
-import * as pomodoroRepository from "../repositories/pomodoro.repository";
+import * as pomodoroRepository from "../repositories/pomodor.repository.js";
 
 export const createPomodoro = async (pomodoro) => {
   try {
@@ -16,7 +16,7 @@ export const createPomodoro = async (pomodoro) => {
 
 export const getPomodoroById = async (pomodoroId) => {
   try {
-    const pomodoro = await pomodoroRepository.findPomodoroById(pomodoroId);
+    const pomodoro = await pomodoroRepository.getPomodoroById(pomodoroId);
     if (!pomodoro) throw new Error(errorCodes.POMODORO.POMODORO_NOT_FOUND);
     return pomodoro;
   } catch (e) {
@@ -29,7 +29,7 @@ export const getPomodoroById = async (pomodoroId) => {
 
 export const getAllPomodoros = async () => {
   try {
-    const pomodoros = await pomodoroRepository.findAllPomodoros();
+    const pomodoros = await pomodoroRepository.getPomodoros();
     return pomodoros;
   } catch (e) {
     throw new ServiceError(
@@ -41,7 +41,7 @@ export const getAllPomodoros = async () => {
 
 export const getPomodoroByUser = async (userId) => {
   try {
-    const pomodoros = await pomodoroRepository.findPomodoroByUser(userId);
+    const pomodoros = await pomodoroRepository.getPomodoroByUser(userId);
     return pomodoros;
   } catch (e) {
     throw new ServiceError(
@@ -77,9 +77,9 @@ export const deletePomodoro = async (pomodoroId) => {
   }
 };
 
-export const addTodoToPomodoro = async (pomodoroId, todoId) => {
+export const patchTodoInPomodoro = async (pomodoroId, todoId) => {
   try {
-    const pomodoro = await pomodoroRepository.addTodoToPomodoro(
+    const pomodoro = await pomodoroRepository.patchTodoInPomodoro(
       pomodoroId,
       todoId
     );
