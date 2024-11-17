@@ -22,3 +22,24 @@ export const registerController = async (req, res, next)=>{
     }
 }
 
+export const loginController = async(req, res, next)=>{
+    try{    
+        const {email, password}= req.body
+        const token = await login(email, password)
+        res.status(200).send(token)
+    }catch(e){
+        switch(e){
+            case errorCodes.AUTH.INVALID_CREDENTIALS:
+                next(createHttpError(400, "Invalid credentials"))
+                break
+            case errorCodes.AUTH.FAILD_CREATE_TOKEN:
+                next(createHttpError(500, "Token creation error"))
+                break
+            case errorCodes.AUTH.FAILD_TO_LOGIN:
+                next(createHttpError(500, "Login error"))
+                break
+            default:
+                next(e)
+        }
+    }
+}
