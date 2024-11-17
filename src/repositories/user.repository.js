@@ -6,12 +6,12 @@ export const createUser = async (user)=>{
 }
 
 export const findUserById = async(id)=>{
-    return await User.findById(id);
+    return await User.findById(id, '-password -token');
 }
 
 
 export const findAllUsers = async()=>{
-    return await User.find({});
+    return await User.find({}, '-password -token');
 }
 
 export const findUserByEmail = async(email)=>{
