@@ -13,6 +13,10 @@ export const getTodoById = async (id) => {
   return await Todo.findById(id);
 };
 
+export const getTodoByUserId = async (userId) => {
+  return await Todo.find({ userId });
+};
+
 export const updateTodo = async (id, todo) => {
   return await Todo.findByIdAndUpdate(id, todo, { new: true });
 };
