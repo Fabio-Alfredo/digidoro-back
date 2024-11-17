@@ -31,9 +31,8 @@ export const login = async (email, password) => {
 
     const token = createToken({ id: existUser._id });
     if (!token) throw new ServiceError("Token creation error", errorCodes.AUTH.FAILD_CREATE_TOKEN);
-
-    await userReposiry.addToken(existUser._id, token);
-
+    await userReposiry.addToken(existUser._id, token.token);
+    console.log(token);
     return token;
   } catch (e) {
     throw new ServiceError(

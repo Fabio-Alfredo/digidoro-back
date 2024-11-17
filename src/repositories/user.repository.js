@@ -31,7 +31,7 @@ export const addTodo = async(id, todoId)=>{
 }
 
 export const addToken = async(id, token)=>{
-    return await User.findByIdAndUpdate(id, {token}, {new: true});
+    return await User.findByIdAndUpdate(id,{$set: {token}}, {new: true});
 }
 
 export const addPomodoro = async(id, pomodoroId)=>{
