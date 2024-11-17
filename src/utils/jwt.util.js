@@ -3,7 +3,7 @@ import { config } from "../configs/config.js";
 
 export const createToken = (payload) => {
   const token = sign(payload, config.jwSecret, { expiresIn: "1d" });
-  return token;
+  return {token};
 };
 
 export const verify = (token) => {
