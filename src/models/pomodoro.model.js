@@ -5,7 +5,6 @@ const pomodoroSchema = new Schema(
   {
     time: {
       type: Number,
-      required: true,
       default: 1500,
     },
     state: {

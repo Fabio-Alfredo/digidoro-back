@@ -1,6 +1,5 @@
-import { get } from "mongoose";
-import { getAllUsers, getUserById } from "../services/user.service";
-import { errorCodes } from "../utils/errors/error.code";
+import { getAllUsers, getUserById } from "../services/user.service.js";
+import { errorCodes } from "../utils/errors/error.code.js";
 import createHttpError from "http-errors";
 
 export const getAllUsersController = async (req, res, next) => {
