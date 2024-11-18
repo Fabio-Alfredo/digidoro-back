@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { STATE } from "../utils/pomodoro.utils.js";
+import { POMODORO_STATE } from "../utils/constants/pomodoroStates.utils";
 
 const pomodoroSchema = new Schema(
   {
@@ -9,8 +9,9 @@ const pomodoroSchema = new Schema(
     },
     state: {
       type: String,
-      enum: [STATE.WORK, STATE.BREAK, STATE.NONE],
-      default: STATE.WORK,
+      enum: [POMODORO_STATE.WORK, POMODORO_STATE.BREAK, POMODORO_STATE.NONE],
+      required: true,
+      default: POMODORO_STATE.NONE,
     },
     id_user: {
       type: Schema.Types.ObjectId,
