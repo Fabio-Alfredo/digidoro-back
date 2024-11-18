@@ -1,5 +1,5 @@
-import { ServiceError } from "../utils/error";
-import { errorCodes } from "../utils/errors/error.code";
+import { ServiceError } from "../errors/servise.error.js";
+import { errorCodes } from "../utils/errors/error.code.js";
 import * as pomodoroRepository from "../repositories/pomodor.repository.js";
 
 export const createPomodoro = async (pomodoro) => {

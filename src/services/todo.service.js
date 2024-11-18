@@ -1,5 +1,5 @@
-import { errorCodes } from "../utils/errors/error.code";
-import { ServiceError } from "../utils/error";
+import { errorCodes } from "../utils/errors/error.code.js";
+import { ServiceError } from "../errors/servise.error.js";
 import * as todoRepository from "../repositories/todo.respository.js";
 
 export const createTodo = async (todo) => {

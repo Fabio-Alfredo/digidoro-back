@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-   validateEnv = (variable, name) => {
+const validateEnv = (variable, name) => {
   if (!variable) throw new Error(`Environment variable ${name} is not defined`);
   return variable;
 };

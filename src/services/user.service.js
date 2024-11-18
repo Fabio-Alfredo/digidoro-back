@@ -1,6 +1,6 @@
-import { ServiceError } from "../utils/error";
-import { errorCodes } from "../utils/errors/error.code";
-import * as userReposiry from "../repositories/user.repository";
+import { ServiceError } from "../errors/servise.error.js";
+import { errorCodes } from "../utils/errors/error.code.js";
+import * as userReposiry from "../repositories/user.repository.js";
 
 export const getUserById = async (userId) => {
   try {

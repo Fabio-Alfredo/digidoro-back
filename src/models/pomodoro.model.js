@@ -1,18 +1,16 @@
 import { Schema, model } from "mongoose";
-import { STATE } from "../utils/pomodoro.utils";
+import { STATE } from "../utils/pomodoro.utils.js";
 
 const pomodoroSchema = new Schema(
   {
     time: {
       type: Number,
-      required: true,
       default: 1500,
     },
     state: {
       type: String,
       enum: [STATE.WORK, STATE.BREAK, STATE.NONE],
-      required: true,
-      default: STATE.NONE,
+      default: STATE.WORK,
     },
     id_user: {
       type: Schema.Types.ObjectId,
