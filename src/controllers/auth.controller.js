@@ -1,7 +1,7 @@
-import { register, login, logout } from "../services/auth.service";
-import { addPomodoro } from "../repositories/user.repository";
-import { createPomodoro } from "../repositories/pomodor.repository";
-import { errorCodes } from "../utils/errors/error.code";
+import { register, login, logout } from "../services/auth.service.js";
+import { addPomodoroUser } from "../services/user.service.js";
+import { createPomodoro } from "../services/pomodoro.service.js";
+import { errorCodes } from "../utils/errors/error.code.js";
 import createHttpError from "http-errors";
 
 export const registerController = async (req, res, next) => {
@@ -9,17 +9,24 @@ export const registerController = async (req, res, next) => {
     const user = req.body;
     const newUser = await register(user);
 
-    const pomodor = await createPomodoro({ userId: newUser._id });
-    await addPomodoro(newUser._id, pomodor._id);
+    const pomodor = await createPomodoro({ id_user: newUser._id });
+    console.log(pomodor);
+    await addPomodoroUser(newUser._id, pomodor._id);
 
-    res.status(201).send("User created successfully");
+    res.status(201).send({message: "User created successfully"});
   } catch (e) {
-    switch (e) {
+    switch (e.code) {
       case errorCodes.AUTH.USER_ALREADY_EXISTS:
         next(createHttpError(400, "User already exists"));
         break;
       case errorCodes.AUTH.FAILD_TO_CREATE_USER:
         next(createHttpError(500, "Register error"));
+        break;
+      case errorCodes.POMODORO.CREATE_POMODORO_FAIL:
+        next(createHttpError(500, "Create pomodoro error"));
+        break;
+      case errorCodes.USER.FAILD_TO_ADD_POMODORO:
+        next(createHttpError(500, "Add pomodoro to user error"));
         break;
       default:
         next(e);
@@ -33,7 +40,7 @@ export const loginController = async (req, res, next) => {
     const token = await login(email, password);
     res.status(200).send(token);
   } catch (e) {
-    switch (e) {
+    switch (e.code) {
       case errorCodes.AUTH.INVALID_CREDENTIALS:
         next(createHttpError(400, "Invalid credentials"));
         break;

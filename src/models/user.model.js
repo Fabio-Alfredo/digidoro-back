@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import { hash, compare } from "bcrypt";
-import { config } from "../configs/config";
+import { config } from "../configs/config.js";
 
 const userSchema = new Schema(
   {
@@ -18,6 +18,7 @@ const userSchema = new Schema(
     },
     token:{
       type: String,
+      default: null,
     }
     ,
     id_pomodoro: {
@@ -38,7 +39,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next){
     if(!this.isModified("password")) return next();
 
-    this.password = await hash(this.password, config.salt);
+    this.password = await hash(this.password, parseInt(config.salt));
     next();
 })
 

@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { TODO_STATE } from "../utils/constants/todoState.utils";
 
 const todoSchema = new Schema(
   {
@@ -12,8 +13,8 @@ const todoSchema = new Schema(
     },
     state: {
       type: String,
-      enum: ["pending", "completed", "progress"],
-      required: true,
+      enum: [TODO_STATE.PENDING, TODO_STATE.COMPLETE, TODO_STATE.PROGRESS],
+      default: TODO_STATE.PENDING,
     },
     color: {
       type: String,
