@@ -30,7 +30,7 @@ export const getTodoById = async (todoId) => {
 export const getAllTodos = async () => {
   try {
     const todos = await todoRepository.getTodos();
-    return todos;
+    return todos || [];
   } catch (e) {
     throw new ServiceError(
       "Get all todos error",
@@ -42,7 +42,7 @@ export const getAllTodos = async () => {
 export const getTodosByUserId = async (userId) => {
   try {
     const todos = await todoRepository.getTodoByUserId(userId);
-    return todos;
+    return todos || [];
   } catch (e) {
     throw new ServiceError(
       "Get todos by user id error",
