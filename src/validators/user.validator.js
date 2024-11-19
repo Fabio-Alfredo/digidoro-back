@@ -21,9 +21,3 @@ export const  loginValidator = [
     .isEmail().withMessage('Email must be a valid email address')
     .normalizeEmail(),   
 ]
-
-export const logoutValidator = [
-    body('token').notEmpty().withMessage('Token is required')
-    .isString().withMessage('Token must be a string')
-]
-

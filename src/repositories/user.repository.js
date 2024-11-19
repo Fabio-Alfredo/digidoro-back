@@ -22,6 +22,10 @@ export const updateUser = async(id, user)=>{
     return await User.findByIdAndUpdate(id, user, {new: true});
 }
 
+export const deleteToken = async(id)=>{
+    return await User.findByIdAndUpdate(id, {$set: {token: null}}, {new: true});
+}
+
 export const deleteUser = async(id)=>{
     return await User.findByIdAndDelete(id);
 }
