@@ -1,5 +1,5 @@
 import { body, param } from "express-validator";
-import { POMODORO_STATE } from "../utils/constants/pomodoroStates.utils";
+import { POMODORO_STATE } from "../utils/constants/pomodoroStates.utils.js";
 
 export const patchStatePomodoroValidator = [
     body('state').notEmpty().withMessage('State is required')

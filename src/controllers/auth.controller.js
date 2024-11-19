@@ -15,6 +15,7 @@ export const registerController = async (req, res, next) => {
 
     res.status(201).send({message: "User created successfully"});
   } catch (e) {
+    console.log(e);
     switch (e.code) {
       case errorCodes.AUTH.USER_ALREADY_EXISTS:
         next(createHttpError(400, "User already exists"));
