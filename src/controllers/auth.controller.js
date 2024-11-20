@@ -10,11 +10,12 @@ export const registerController = async (req, res, next) => {
     const newUser = await register(user);
 
     const pomodor = await createPomodoro({ id_user: newUser._id });
-    console.log(pomodor);
+
     await addPomodoroUser(newUser._id, pomodor._id);
 
     res.status(201).send({message: "User created successfully"});
   } catch (e) {
+
     switch (e.code) {
       case errorCodes.AUTH.USER_ALREADY_EXISTS:
         next(createHttpError(400, "User already exists"));

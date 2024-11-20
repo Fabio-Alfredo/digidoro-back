@@ -1,5 +1,5 @@
 import { body } from "express-validator"
-import { TODO_STATE } from "../utils/constants/todoState.utils"
+import { TODO_STATE } from "../utils/constants/todoState.utils.js"
 
 export const createTodoValidator = [
     body('title').notEmpty().withMessage('Title is required')

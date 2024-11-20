@@ -11,7 +11,6 @@ export const register = async (user) => {
     const newUser = await userReposiry.createUser(user);
     return newUser;
   } catch (e) {
-    console.log(e.code);
     throw new ServiceError(
       "Register error",
       e.code || errorCodes.AUTH.FAILD_TO_CREATE_USER
@@ -32,7 +31,7 @@ export const login = async (email, password) => {
     const token = createToken({ id: existUser._id });
     if (!token) throw new ServiceError("Token creation error", errorCodes.AUTH.FAILD_CREATE_TOKEN);
     await userReposiry.addToken(existUser._id, token.token);
-    console.log(token);
+
     return token;
   } catch (e) {
     throw new ServiceError(
@@ -44,7 +43,7 @@ export const login = async (email, password) => {
 
 export const logout = async (userId) => {
   try {
-    await userReposiry.updateUser(userId, { token: null });
+    await userReposiry.deleteToken(userId);
     return "Logout success";
   } catch (e) {
     throw new ServiceError(
