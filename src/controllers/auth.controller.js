@@ -49,7 +49,7 @@ export const loginController = async (req, res, next) => {
         next(createHttpError(500, "Token creation error"));
         break;
       case errorCodes.AUTH.FAILD_TO_LOGIN:
-        next(createHttpError(500, "Login error"));
+        next(createHttpError(500, `Login error ${e}`));
         break;
       default:
         next(e);
