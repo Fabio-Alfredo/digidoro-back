@@ -12,8 +12,9 @@ app.use(express.urlencoded({extended: true}));
 app.use("/api", routes);
 
 app.get("/", (req, res)=>{
-    res.send("Welcome to the API");
+    res.send(`Welcome to the API for port ${PORT}`);
 })
+
 app.use(errorHandler);
 
 dbConnection()
