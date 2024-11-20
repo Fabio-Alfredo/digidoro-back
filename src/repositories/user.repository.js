@@ -1,4 +1,4 @@
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
 export const createUser = async (user)=>{
     const newUser = new User(user);
@@ -6,12 +6,12 @@ export const createUser = async (user)=>{
 }
 
 export const findUserById = async(id)=>{
-    return await User.findById(id);
+    return await User.findById(id, '-password -token');
 }
 
 
 export const findAllUsers = async()=>{
-    return await User.find({});
+    return await User.find({}, '-password -token');
 }
 
 export const findUserByEmail = async(email)=>{
@@ -20,6 +20,10 @@ export const findUserByEmail = async(email)=>{
 
 export const updateUser = async(id, user)=>{
     return await User.findByIdAndUpdate(id, user, {new: true});
+}
+
+export const deleteToken = async(id)=>{
+    return await User.findByIdAndUpdate(id, {$set: {token: null}}, {new: true});
 }
 
 export const deleteUser = async(id)=>{
@@ -31,7 +35,7 @@ export const addTodo = async(id, todoId)=>{
 }
 
 export const addToken = async(id, token)=>{
-    return await User.findByIdAndUpdate(id, {token}, {new: true});
+    return await User.findByIdAndUpdate(id,{$set: {token}}, {new: true});
 }
 
 export const addPomodoro = async(id, pomodoroId)=>{

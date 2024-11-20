@@ -6,8 +6,8 @@ import { createToken } from "../utils/jwt.util.js";
 export const register = async (user) => {
   try {
     const existUser = await userReposiry.findUserByEmail(user.email);
-    if (existUser) throw new Error(errorCodes.AUTH.USER_ALREADY_EXISTS);
-
+    if (existUser) throw new ServiceError('user exists ',errorCodes.AUTH.USER_ALREADY_EXISTS);
+    
     const newUser = await userReposiry.createUser(user);
     return newUser;
   } catch (e) {
@@ -23,12 +23,14 @@ export const login = async (email, password) => {
     const existUser = await userReposiry.findUserByEmail(email);
 
     if (!existUser || !(await existUser.comparePassword(password)))
-      throw new Error(errorCodes.AUTH.INVALID_CREDENTIALS);
+      throw new ServiceError(
+        "Invalid credentials",
+        errorCodes.AUTH.INVALID_CREDENTIALS
+      );
 
     const token = createToken({ id: existUser._id });
-    if (!token) throw new Error(errorCodes.AUTH.FAILD_CREATE_TOKEN);
-
-    await userReposiry.addToken(existUser._id, token);
+    if (!token) throw new ServiceError("Token creation error", errorCodes.AUTH.FAILD_CREATE_TOKEN);
+    await userReposiry.addToken(existUser._id, token.token);
 
     return token;
   } catch (e) {
@@ -41,7 +43,7 @@ export const login = async (email, password) => {
 
 export const logout = async (userId) => {
   try {
-    await userReposiry.updateUser(userId, { token: null });
+    await userReposiry.deleteToken(userId);
     return "Logout success";
   } catch (e) {
     throw new ServiceError(
