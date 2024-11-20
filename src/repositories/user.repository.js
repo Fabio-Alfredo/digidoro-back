@@ -1,8 +1,8 @@
 import User from "../models/user.model.js";
 
-export const createUser = async (user)=>{
+export const createUser = async (user, opts)=>{
     const newUser = new User(user);
-    return await newUser.save();
+    return await newUser.save({session: opts.session});
 }
 
 export const findUserById = async(id)=>{
@@ -34,6 +34,6 @@ export const addToken = async(id, token)=>{
     return await User.findByIdAndUpdate(id,{$set: {token}}, {new: true});
 }
 
-export const addPomodoro = async(id, pomodoroId)=>{
-    return await User.findByIdAndUpdate(id, {id_pomodoro: pomodoroId}, {new: true});
+export const addPomodoro = async(id, pomodoroId, opts)=>{
+    return await User.findByIdAndUpdate(id, {$set:{id_pomodoro: pomodoroId}}, {new: true, session: opts.session});
 }

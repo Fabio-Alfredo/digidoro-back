@@ -1,8 +1,8 @@
 import Pomodoro from "../models/pomodoro.model.js";
 
-export const createPomodoro = async (pomodoro) => {
+export const createPomodoro = async (pomodoro, opts) => {
   const newPomodoro = new Pomodoro(pomodoro);
-  return await newPomodoro.save();
+  return await newPomodoro.save(opts);
 };
 
 export const getPomodoros = async () => {

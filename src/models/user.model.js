@@ -10,6 +10,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
+      unique: true,
       required: true,
     },
     password: {
@@ -18,7 +19,7 @@ const userSchema = new Schema(
     },
     token:{
       type: String,
-      default: null,
+      default: '',
     }
     ,
     id_pomodoro: {

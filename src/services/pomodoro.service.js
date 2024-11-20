@@ -2,11 +2,12 @@ import { ServiceError } from "../errors/servise.error.js";
 import { errorCodes } from "../utils/errors/error.code.js";
 import * as pomodoroRepository from "../repositories/pomodor.repository.js";
 
-export const createPomodoro = async (pomodoro) => {
+export const createPomodoro = async (pomodoro, opts) => {
   try {
-    const newPomodoro = await pomodoroRepository.createPomodoro(pomodoro);
+    const newPomodoro = await pomodoroRepository.createPomodoro(pomodoro, opts);
     return newPomodoro;
   } catch (e) {
+    console.log(e)
     throw new ServiceError(
       "Create pomodoro error",
       e.code || errorCodes.POMODORO.CREATE_POMODORO_FAIL

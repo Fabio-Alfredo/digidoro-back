@@ -1,19 +1,18 @@
 import { register, login, logout } from "../services/auth.service.js";
-import { addPomodoroUser } from "../services/user.service.js";
-import { createPomodoro } from "../services/pomodoro.service.js";
+import { existUserByEmail } from "../services/user.service.js";
 import { errorCodes } from "../utils/errors/error.code.js";
 import createHttpError from "http-errors";
 
 export const registerController = async (req, res, next) => {
   try {
     const user = req.body;
-    const newUser = await register(user);
 
-    const pomodor = await createPomodoro({ id_user: newUser._id });
-    console.log(pomodor);
-    await addPomodoroUser(newUser._id, pomodor._id);
+    const existUser = await existUserByEmail(user.email);
+    if (existUser) throw new createHttpError(400, "User already exists");
 
-    res.status(201).send({message: "User created successfully"});
+    await register(user);
+
+    res.status(201).send({ message: "User created successfully" });
   } catch (e) {
     switch (e.code) {
       case errorCodes.AUTH.USER_ALREADY_EXISTS:

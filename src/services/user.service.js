@@ -27,6 +27,17 @@ export const getAllUsers = async () => {
     }
 };
 
+export const existUserByEmail = async (email) => {
+    try{
+        const user = await userReposiry.findUserByEmail(email);
+        return user;
+    }catch(e){
+        throw new ServiceError(
+            "Find user by email error",
+            e.code || errorCodes.USER.USER_FECH_FAIL
+        );
+    }
+}
 
 export const updateUser =async(userId, data)=>{
     try{
@@ -66,9 +77,10 @@ export const addTodoUser = async (userId, todoId)=>{
     }
 }
 
-export const addPomodoroUser = async (userId, pomodoroId)=>{
+export const addPomodoroUser = async (userId, pomodoroId, opts)=>{
     try{
-        const user = await userReposiry.addPomodoro(userId, pomodoroId);
+        const user = await userReposiry.addPomodoro(userId, pomodoroId, opts);
+
         return user;
     }catch(e){
         throw new ServiceError(
