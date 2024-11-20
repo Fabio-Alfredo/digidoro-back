@@ -10,6 +10,10 @@ const PORT = config.port|| 3002;
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use("/api", routes);
+
+app.get("/", (req, res)=>{
+    res.send("Welcome to the API");
+})
 app.use(errorHandler);
 
 dbConnection()
